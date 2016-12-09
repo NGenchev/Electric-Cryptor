@@ -39,7 +39,8 @@
 	<link rel="stylesheet" type="text/css" href="styles/style-1.css">
 	<link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="js/toggle-side.js"></script><script src="js/search.js"></script>
+	<script src="js/toggle-side.js"></script>
+	<script src="js/search.js"></script>
 </head>
 <body>
 	<div class="main">
@@ -53,7 +54,7 @@
 	<?php if(isset($_SESSION['logged']) && $_SESSION['logged'] === true) : ?>
 		<a href="myAccount.php" class="menu-item"><i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp; Моят профил</a>
 		<a href="myPasswords.php" class="menu-item active-link"><i class="fa fa-key" aria-hidden="true"></i> &nbsp; Моите пароли</a>
-		<a href="logout.php" class="menu-item"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Изход</a>4
+		<a href="logout.php" class="menu-item"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Изход</a>
 	<?php else : ?>
 		<a href="entrance.php" class="menu-item"><i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp; Влез в системата</a>
 	<?php endif; ?>
@@ -70,11 +71,8 @@
   	<div id="topbar">
 	  	<div id="toggle-btn" onclick="toggleNav()"></div>
   		<div id="searchbar">
-			<form>
 				<input type="text" name="search" placeholder="Търсене..." />
 				<input type="submit" name="search_button" value=" " />
-
-			</form>
   		</div>
   	</div>
   	<div class="clear"></div>
