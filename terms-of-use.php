@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Security Password Manager</title>
+	<title>Secured Password Manager</title>
 	<link rel="stylesheet" type="text/css" href="styles/style-1.css">
 	<link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css">
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -61,7 +61,7 @@
 	<center>
 	<div class="content2" style="color: #354052">
 		<div class="container2-login">
-				<p style="text-align: justify;">Този уеб сайт е официалният сайт на Security Password Manager (SPM-Electric Crew) по смисъла на чл. 10, ал. 3 от Закона за електронното управление. Сайтът и неговото съдържание се публикуват за Ваше удобство и са предназначени изключително за лична и некомерсиална употреба.&nbsp;&nbsp;</p>
+				<p style="text-align: justify;">Този уеб сайт е официалният сайт на Secured Password Manager (SPM-Electric Crew) по смисъла на чл. 10, ал. 3 от Закона за електронното управление. Сайтът и неговото съдържание се публикуват за Ваше удобство и са предназначени изключително за лична и некомерсиална употреба.&nbsp;&nbsp;</p>
 				<p style="text-align: justify;">При използване на този сайт, моля да имате предвид следното:</p>
 				<h3 style="text-align: justify;"><strong>Авторски права</strong></h3>
 				<p style="text-align: justify;">Софтуерът, осигуряващ функционирането на тази интернет страница, нейният дизайн, включително цялата разположена в сайта информация, доколкото не съставляват обществена информация, са обект на авторско право. Никаква част от обектите на закрила не може да се възпроизвежда, да се превежда, променя или използва по какъвто и да е начин без предварителното съгласие на екипа на Electric-Crew.</p>
@@ -75,7 +75,7 @@
 </center>
 		<!-- Footer -->
 		<footer>
-		  All Rights Reserved &copy; Electric Crypter
+		  Всички права са запазени &copy; 2016-2017 Design &amp; Code By Electric Crew
 		</footer>
 
 </div>

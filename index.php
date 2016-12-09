@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Security Password Manager</title>
+	<title>Secured Password Manager</title>
 	<link rel="stylesheet" type="text/css" href="styles/style-1.css">
 	<link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -57,18 +57,15 @@
 		<!-- Table -->
 		<div class="content2">
 			<div class="article">
-				<h2 class="title">Добре дошли във Security Password Manager</h2>
-				<p>
-					Добре дошли в потребителският панел на Electric-Encrypter - Secured Password Manager(SPM). За да започнете работа, моля влезте с името и паролата си. Нямате акаунт? Можете да си създадете нов - бързо и лесно от <a href="myAccount.php">Моят Профил</a>, а най-добрата новина е, че създаването му е БЕЗПЛАТНО!
-
-					Тук вие свободно можете да си създадете акаунт и да въведете информация за акаунтите си и само вие ще можете да си ги използвате. Чрез нашата система не ви се налага да помните вече многото пароли, които използвате всеки ден.. чрез една master/главна парола можете да декриптирате всяка ваша парола, а чрез първата парола можете да влезете в акаунта си и да добавите/редактирате/прегледате или изтриете паролите си.</p>
+				<h2 class="title">Добре дошли във Secured Password Manager</h2>
+				<p>	Добре дошли в потребителския панел на Electric Crypter - Secured Password Manager (SPM). За да започнете работа, моля влезте с името и паролата си. Нямате акаунт? Можете да си създадете нов - бързо и лесно от  <a href="myAccount.php">Моят Профил</a>, а най-добрата новина е, че създаването му е БЕЗПЛАТНО! Тук вие свободно можете да си създадете акаунт и да въведете информация за акаунтите си и само вие ще можете да си ги използвате. Чрез нашата система не ви се налага да помните вече многото пароли, които използвате всеки ден. Чрез една master/главна парола можете да декриптирате всяка ваша парола, а с основната парола можете да влезете в акаунта си и да добавите/редактирате/прегледате или изтриете паролите си.</p>
 			</div>
 			</div>
 
 	</div>
 		<!-- Footer -->
 		<footer>
-		  All Rights Reserved &copy; Electric Crypter
+		  Всички права са запазени &copy; 2016-2017 Design &amp; Code By Electric Crew
 		</footer>
 	</div>
     </body>

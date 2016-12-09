@@ -94,7 +94,7 @@
 	</div>
 		<!-- Footer -->
 		<footer>
-		  All Rights Reserved &copy; Electric Crypter
+		  Всички права са запазени &copy; 2016-2017 Design &amp; Code By Electric Crew
 		</footer>
 	</div>
 
