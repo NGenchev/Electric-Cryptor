@@ -67,6 +67,28 @@
 		<!-- Registration -->
 	<center>
 		<div class="content2">
+		<script type='text/javascript'>
+		  function removeAdmin(id)
+		  {
+			var ask = confirm("Искате ли да махнете правата на админа?");
+			var userID = id;
+			  if (ask == true) {
+			  $(function(){
+				$.ajax({
+					type: "POST",
+					url: "remove_response.php",
+					data: {userID},
+					success: function(data){
+						data = JSON.parse(data);
+						if(data.valid==true) alert("Успешно изтрихте администратор!");
+						else alert("Този потребител не е администратор");
+					}
+				});
+				return false;
+			 });
+			}
+		  }
+		</script>
 		<div class="container2-login">
 			<table>
 			     <thead>
