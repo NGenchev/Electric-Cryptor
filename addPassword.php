@@ -10,24 +10,60 @@
   $active = $res[0]['user_activated'];
   if($active != TRUE)
     echo "<script>alert('Моля първо потвърдете емайла си, за да добавяте пароли!');location.replace('myPassword.php');</script>";
-
+	$message = $_SESSION['message'];
+	$_SESSION['message'] = NULL;
   if(isset($_POST['add']) && $active == TRUE):
-	$siteName = $_POST['url'];
-	$username = encrypt_uPwds($_POST['username']);
-	$password = encrypt_uPwds($_POST['password']);
-	$uID      = $_SESSION['uID'];
-	$sql = "INSERT INTO passwords (`pw_uID`, `pw_site`, `pw_user`, `pw_content`) VALUES ('$uID', '$siteName', '$username', '$password')";
+	$mPass = encrypt($_POST['mPass']);
+	$sql = "SELECT * FROM users WHERE `user_mPassword` = '$mPass' and `user_id` = '{$_SESSION['uID']}'";
+	$res = $dbh->prepare($sql);
+	$res->execute();
+	$count = $res->rowCount();
+	
+	if($res->rowCount() == 1)
+	{
+		$siteName = $_POST['url'];
+		if(strlen($siteName)<3)
+			$msg = "Невалидни данни за име сайт/приложение...";
 
-	if($dbh->prepare($sql)->execute())
-		 $message = array(
-			"type" => "success",
-			"message" => "Успешно добавихте парола!"
-		);
+		$username = encrypt_uPwds($_POST['username'], $mPass);
+		if(strlen($_POST['username'])<3)
+			$msg = "Невалидни данни за потребителско име на сайт/приложение...";
+		
+		$password = encrypt_uPwds($_POST['password'], $mPass);
+		if(strlen($_POST['username'])<3)
+			$msg = "Невалидни данни за потребителско име на сайт/приложение...";
+		
+		if(!isset($msg))
+		{
+			$sql = "INSERT INTO passwords (`pw_uID`, `pw_site`, `pw_user`, `pw_content`) VALUES ('$uID', '$siteName', '$username', '$password')";
+
+			if($dbh->prepare($sql)->execute())
+				 $message = array(
+					"type" => "success",
+					"message" => "Успешно добавихте парола!"
+				);
+			else
+			   $message = array(
+					"type" => "error",
+					"message" => "Проблем с БД!!"
+				);
+		}
+		else
+		{
+			$message = array(
+				"type" => "warning",
+				"message" => $msg
+			);
+		}
+	}
 	else
-	   $message = array(
-			"type" => "error",
-			"message" => "Проблем с БД!!"
-		);
+		   $message = array(
+				"type" => "warning",
+				"message" => "Грешна MASTER парола!"
+			);
+	
+	$_SESSION['message'] = $message;
+	header('Location: addPassword.php'); exit;
   endif;
 ?>
 <!doctype html>
@@ -99,7 +135,7 @@
 		<!-- Table -->
 		<div class="content2">
 			<div class="container2-login">
-				<div id='messageBox' style='width: 380px!important;' class="<?= $message['type'] ?>-msg">
+				<div id='messageBox' style='width: 36%!important;margin: 0 auto;' class="<?= $message['type'] ?>-msg">
 				  <?php 
 				  if(isset($message['type'])){
 					  $type = $message['type'];
@@ -117,6 +153,7 @@
 						<p><input type="text" name='url' placeholder="Сайт"></p>
 						<p><input type="text" name='username' placeholder="Потребителско Име"></p>
 						<p><input type="password" name='password' placeholder="Парола"></p>
+						<p><input type="password" name='mPass' placeholder="MASTER Парола"></p>
 						<p><input type="submit" name='add' value="ДОБАВИ ПАРОЛА"></p>
 					</form>
 				</div>

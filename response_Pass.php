@@ -12,7 +12,7 @@
 			$sql = "SELECT * FROM passwords WHERE pw_id = '$pwID' AND pw_uID = '$userID'";
 			$res = $dbh->prepare($sql);
 			$res->execute();
-			$pass = $res->fetchAll();
+			$pass = $res->fetchAll();			
 			$pass = decrypt_uPwds($pass[0]['pw_content']);
 			
 			$data = array(
@@ -21,11 +21,10 @@
 			);
 		}
 		else
-		{
 			$data = array(
 				"valid" => false,
 				"password" => "Forbidden"
 			);
-		}
+			
 		echo json_encode($data);
 	endif;

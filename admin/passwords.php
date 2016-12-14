@@ -2,6 +2,70 @@
   session_start();
   require_once('../includes/database_config.php');
   if($_SESSION['type'] != 1 || $_SESSION['logged'] !== TRUE || !isset($_SESSION)) header('Location: ../index.php');  
+	// Users information
+	$Passwords = array(
+		"total" =>
+				array(
+					"count" => 0,
+					"pcnts" => 0
+				),
+		"day"   =>
+				array(
+					"count" => 0,
+					"pcnts" => 0
+				),
+		"week"   =>
+				array(
+				"count" => 0,
+				"pcnts" => 0
+				),
+		"month" =>
+				array(
+					"count" => 0,
+					"pcnts" => 0
+				),
+		"year"  =>
+			   array(
+					"count" => 0,
+					"pcnts" => 0
+				)
+	);
+
+	$sql = "SELECT * FROM passwords";
+	$res = $dbh->prepare($sql);
+	$res->execute();
+	$rows = $res->fetchAll();
+
+	$Passwords['total']['count'] = $res->rowCount();
+	if($Passwords['total']['count']!=0)
+	{	
+		foreach($rows as $row)
+		{
+			// Day
+			  $dateOfCreate = date("d-m-Y", strtotime($row['pw_Created']));
+			  $nowDate = date("d-m-Y");
+			  if($dateOfCreate == $nowDate) $Passwords['day']['count']++;
+			// Week
+			  
+			// Month
+			  $dateOfCreate = date("m-Y", strtotime($row['pw_Created']));
+			  $nowDate = date("m-Y");
+			  if($dateOfCreate == $nowDate) {
+				  $Passwords['month']['count']++;
+					if((date("d")-date("d", strtotime($row['pw_Created']))) <= 7 ) $Passwords['week']['count']++;
+			  }
+			  // Year
+			  $dateOfCreate = date("Y", strtotime($row['pw_Created']));
+			  $nowDate = date("Y");
+			  if($dateOfCreate == $nowDate) $Passwords['year']['count']++;
+		}
+
+		$Passwords['day']['pcnts']    = round($Passwords['day']['count']    / $Passwords['total']['count'] * 100, 2);
+		$Passwords['week']['pcnts']   = round($Passwords['week']['count']   / $Passwords['total']['count'] * 100, 2);
+		$Passwords['month']['pcnts']  = round($Passwords['month']['count']  / $Passwords['total']['count'] * 100, 2);
+		$Passwords['year']['pcnts']   = round($Passwords['year']['count']   / $Passwords['total']['count'] * 100, 2);
+		$Passwords['total']['pcnts']  = round($Passwords['total']['count']  / $Passwords['total']['count'] * 100, 2);
+	}
 ?>
 <!doctype html>
 <html>
@@ -12,14 +76,45 @@
 	<link rel="stylesheet" type="text/css" href="../styles/style-1.css">
 	<link rel="stylesheet" type="text/css" href="../styles/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="../styles/chart.css">
+		<style>
+		.chart {
+		  width: 100%;
+		  min-height: 450px;
+		}
+		</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="../js/toggle-side.js"></script>
 	<script src="../js/search.js"></script>
+	<script src="https://www.google.com/jsapi"></script>
+	<script type='text/javascript'>
+	  google.load("visualization", "1", {packages:["corechart"]});
+	  google.setOnLoadCallback(drawChart1);
+	  function drawChart1() {
+		var data = google.visualization.arrayToDataTable([
+		  ['Период (брой)', 'в проценти'],
+		  ['Днес (<?= $Passwords['day']['count'] ?>)',  <?= $Passwords['day']['pcnts'] ?>],
+		  ['Тази Седмица (<?= $Passwords['week']['count'] ?>)', <?= $Passwords['week']['pcnts'] ?>],
+		  ['Този Месец (<?= $Passwords['month']['count'] ?>)', <?= $Passwords['month']['pcnts'] ?>],
+		  ['Тази Година (<?= $Passwords['year']['count'] ?>)', <?= $Passwords['year']['pcnts'] ?>],
+		  ['Общо (<?= $Passwords['total']['count'] ?>)', <?= $Passwords['total']['pcnts'] ?>]
+		]);
+
+		var options = {
+		  title: 'Период (брой пароли) / паролите в проценти',
+	   };
+
+	  var chart = new google.visualization.ColumnChart(document.getElementById('chart_div1'));
+		chart.draw(data, options);
+	  }
+	  $(window).resize(function(){
+		drawChart1();
+	  });
+	</script>
 </head>
 <body>
 	<div class="main">
     <div id="_side-panel" class="side-panel">
-    	<div class="user-image" style="background: url('<?= $_SESSION['avatar'] ?? "../imgs/avatar.png" ?>') no-repeat; background-size: contain; background-position: 50% 50%;"></div>
+    	<div class="user-image" style="background: url('<?= $_SESSION['avatar'] ?? "../../imgs/avatar.png" ?>') no-repeat; background-size: contain; background-position: 50% 50%;"></div>
 		<span class="user-name"><?= $_SESSION['name'] ?></span>
 		<hr class="separator">
 		<span class="menu-cat">Потребителски панел</span>
@@ -55,86 +150,7 @@
 		<div class="content2">
 			<div class="article">
 				<h2 class="title">Брой на  добавени пароли</h2>
-				<div id="chart">
-		      <ul id="numbers">
-		        <li><span>100%</span></li>
-		        <li><span>90%</span></li>
-		        <li><span>80%</span></li>
-		        <li><span>70%</span></li>
-		        <li><span>60%</span></li>
-		        <li><span>50%</span></li>
-		        <li><span>40%</span></li>
-		        <li><span>30%</span></li>
-		        <li><span>20%</span></li>
-		        <li><span>10%</span></li>
-		        <li><span>0%</span></li>
-		      </ul>
-	<?php 
-		// Passwords information
-		$Passwords = array(
-			"total" => 
-					array(
-						"count" => 0,
-						"pcnts" => 100
-					),
-			"day"   =>
-					array(
-						"count" => 0,
-						"pcnts" => 0
-					),
-			"month" =>
-					array(
-						"count" => 0,
-						"pcnts" => 0
-					),
-			"year"  =>
-				   array(
-						"count" => 0,
-						"pcnts" => 0
-					)
-		);
-
-		$sql = "SELECT * FROM passwords";
-		$res = $dbh->prepare($sql);
-		$res->execute();
-		$rows = $res->fetchAll();
-
-		$Passwords['total']['count'] = $res->rowCount();
-
-		foreach($rows as $row)
-		{
-			// Day
-			  $dateOfCreate = date("d-m-Y", strtotime($row['pw_Created']));
-			  $nowDate = date("d-m-Y");
-			  if($dateOfCreate == $nowDate) $Passwords['day']['count']++;
-			// Month
-			  $dateOfCreate = date("m-Y", strtotime($row['pw_Created']));
-			  $nowDate = date("m-Y");
-			  if($dateOfCreate == $nowDate) $Passwords['month']['count']++;
-			// Year
-			  $dateOfCreate = date("Y", strtotime($row['pw_Created']));
-			  $nowDate = date("Y");
-			  if($dateOfCreate == $nowDate) $Passwords['year']['count']++;
-		}
-
-		$Passwords['day']['pcnts']    = round($Passwords['day']['count']    / $Passwords['total']['count'] * 100, 2);
-		$Passwords['month']['pcnts']  = round($Passwords['month']['count']  / $Passwords['total']['count'] * 100, 2);
-		$Passwords['year']['pcnts']   = round($Passwords['year']['count']   / $Passwords['total']['count'] * 100, 2);
-	?>
-		      <ul id="bars">
-		        <li><div data-percentage="<?= $Passwords['day']['pcnts'] ?>" class="bar"></div>
-					<span>Днес (<?= $Passwords['day']['count'] ?>)</span></li>
-					
-		        <li><div data-percentage="<?= $Passwords['month']['pcnts'] ?>" class="bar"></div>
-					<span>Този месец (<?= $Passwords['month']['count'] ?>)</span></li>
-					
-		        <li><div data-percentage="<?= $Passwords['year']['pcnts'] ?>" class="bar"></div>
-					<span>Тази година (<?= $Passwords['year']['count'] ?>)</span></li>
-				
-				<li><div data-percentage="<?= $Passwords['total']['pcnts'] ?>" class="bar"></div>
-					<span>Общо (<?= $Passwords['total']['count'] ?>)</span></li>
-		      </ul>
-		    </div>
+				<div id="chart_div1" class="chart"></div>
 				<br>
 			</div>
 			</div>

@@ -91,8 +91,8 @@
 					data: {master, userID, pwID},
 					success: function(data){
 						data = JSON.parse(data);
-					if(data.valid==true) prompt('Вашата парола е:', data.password);
-				   else alert("Грешна master парола!");
+						if(data.valid==true) prompt('Вашата парола е:', data.password);
+						else alert("Грешна master парола!");
 					}
 				});
 				return false;
@@ -113,8 +113,8 @@
 					data: {master, userID, pwID},
 					success: function(data){
 						data = JSON.parse(data);
-					if(data.valid==true) prompt('Вашата парола е:', data.user);
-				   else alert("Грешна master парола!");
+						if(data.valid==true) prompt('Вашият никнейм е:', data.user);
+						else alert("Грешна master парола!");
 						}
 					});
 					return false;
@@ -135,7 +135,11 @@
 					data: {master, userID, pwID},
 					success: function(data){
 						data = JSON.parse(data);
-						if(data.valid==true) alert("Успешно изтрихте паролата!");
+						if(data.valid==true) 
+							{
+								alert("Успешно изтрихте паролата!");
+								$('#pass_'+id).hide(500);
+							}
 						else alert("Грешна master парола!");
 					}
 				}); return false;
@@ -205,7 +209,7 @@
 
                     $lUp = date("d $month Y H:i:s\ч.", strtotime($lUp));
                     echo "
-                    <tr>
+                    <tr id='pass_{$id}'>
                       <td>$site</td>
                       <td>
                       <button class='edit' onclick='showUser($id);' id='$id'>ПОКАЖИ</button>
@@ -223,7 +227,12 @@
                   }
                 }
                 else {
-                  echo "Нямате добавени пароли все още... <BR><BR>";
+                  echo '
+					<div id="messageBox" style="width: 65%!important;" class="info-msg">
+						<i class="fa fa-warning"></i>&nbsp;
+						Нямате добавени пароли...
+					</div>
+				  ';
                 }
               ?>
 		     </tbody>

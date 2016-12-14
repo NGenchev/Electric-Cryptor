@@ -1,6 +1,6 @@
 <?php
-	require_once('includes/database_config.php');
-	if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') :
+    require_once('../includes/database_config.php');
+    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') :
 		extract($_POST);
 		$sql = "SELECT * FROM users WHERE user_id = '{$userID}' AND user_type = '1'";
 		$res = $dbh->prepare($sql);

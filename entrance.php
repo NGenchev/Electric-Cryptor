@@ -25,7 +25,7 @@
             $_SESSION['uID']    = $data[0]['user_id'];
             $_SESSION['lastLogin'] = $data[0]['user_lastLogin'];
             $_SESSION['type']   = $data[0]['user_type'];
-			
+
 			$sql = "UPDATE users SET user_lastLogin = Now() WHERE user_id = '{$_SESSION['uID']}'";
 			$result = $dbh->prepare($sql);
 			$result->execute();
@@ -65,6 +65,7 @@
           "message" => "Неуспешен вход - моля въведете сбора на числата коректно!"
         );
     } // captcha check
+	unset($_POST);
   } //LOGIN SUBMIT
 
   if(isset($_POST['register']))
@@ -123,44 +124,44 @@
               // EMAIL SEND
 
               $to      = $email; // Send email to our user
-              $subject = 'Secured Password Manager | Потвърждение'; // Give the email a subject 
+              $subject = 'Secured Password Manager | Потвърждение'; // Give the email a subject
               $message = '
                <BR> <BR>
               Благодарим Ви, за регистрацията!
               Вие успешно създадохте акаунт и с данните по-долу можете да се впишете, след като
               потвърдите емайла си! <BR><BR>
-               
+
               ------------------------<BR>
               Потребителско име: <b>'.$user.'</b> <BR>
               Е-майл: <b>'.$email.'</b> <BR>
               Парола: <i>/паролата която сте въвели за вход при регистрацията/<i> <BR>
               ------------------------ <BR><BR>
-               
+
               Моля кликнете, за да потвърдите акаунта си: <BR>
                <a href="http://www.electric-crew.top/email_confirm.php?email='.$email.'&hash='.$hash.'">http://www.electric-crew.top/email_confirm.php?email='.$email.'&hash='.$hash.'</a> <BR><BR><BR>
-			   
-			   
+
+
 			  ============================================================================================ <BR>
 			  Ako imate problem s kodirovkata i ne razchitate gorniqt text poglednete tozi: <BR>
 			  ============================================================================================ <BR><BR>
-			  
+
 			  Blagodarim Vi, za registratsiyata! <BR>
               Vie uspeshno sazdadohte akaunt i s dannite po-dolu mozhete da se vpishete, sled kato <BR>
               potvardite emayla si! <BR><BR>
-               
+
               ------------------------ <BR>
               Potrebitelsko ime: <b>'.$user.'</b> <BR>
               E-mayl: <b>'.$email.'</b> <BR>
               Parola: <i>/parolata koyato ste vaveli za vhod pri registratsiyata/</i> <BR>
               ------------------------ <BR> <BR>
-               
+
               Molya kliknete, za da potvardite akaunta si: <BR>
                <a href="http://www.electric-crew.top/email_confirm.php?email='.$email.'&hash='.$hash.'">http://www.electric-crew.top/email_confirm.php?email='.$email.'&hash='.$hash.'</a> <BR>
               '; // Our message above including the link
-                                   
+
               $headers = 'From:noreply@electric-crew.top' . "\r\n"; // Set from headers
 			  $headers .= "Content-Type: text/html; charset=UTF-8";
-              
+
               if(mail($to, $subject, $message, $headers))
                 $message_reg = array(
                   "register" => true,
@@ -178,7 +179,7 @@
               "register" => false,
 			  "type"  => "warning",
               "message" => "Не можете да се регистрирате без да се съгласите с условията за конфиденциалност!"
-            ); 
+            );
 	  }
     }
     else
@@ -189,6 +190,7 @@
           "message" => "Неуспешна регистрация - моля въведете сбора на числата коректно!"
         );
     } // captcha check
+	unset($_POST);
   }
 ?><!doctype html>
 <html>
@@ -198,7 +200,7 @@
 	<title>Secured Password Manager</title>
 	<link rel="stylesheet" type="text/css" href="styles/style-1.css">
 	<link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css">
-	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='js/jquery.js'></script>
 	<script src="js/toggle-side.js"></script><script src="js/search.js"></script>
 	<script>
 	</script>
@@ -211,7 +213,7 @@
 		<hr class="separator">
 		<span class="menu-cat">Потребителски панел</span>
 		<a href="index.php" class="menu-item"><i class="fa fa-home" aria-hidden="true"></i> &nbsp; Начало</a>
-		
+
 	<?php if(isset($_SESSION['logged']) && $_SESSION['logged'] === true) { ?>
 		<a href="myAccount.php" class="menu-item"><i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp; Моят профил</a>
 		<a href="myPasswords.php" class="menu-item"><i class="fa fa-key" aria-hidden="true"></i> &nbsp; Моите пароли</a>
@@ -219,7 +221,7 @@
 	<?php } else { ?>
 		<a href="entrance.php" class="menu-item active-link"><i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp; Влез в системата</a>
 	<?php } ?>
-		
+
 	<?php if ($_SESSION['type'] === 1) : ?>
 		<hr class="separator">
 		<span class="menu-cat">Администраторски панел</span>
@@ -256,20 +258,20 @@
 		</header>
 		<br>
 		</div>
-		
+
 		<!-- Registration -->
 	<center>
 		<div class="content2">
 		<div class="container2-login">
-				<div id='messageBox' style='width: 785px!important;' class="<?php echo $message_log['type'] ?? $message_reg['type']; ?>-msg">
-				  <?php 
+				<div id='messageBox' style='width: 65% !important;' class="<?php echo $message_log['type'] ?? $message_reg['type']; ?>-msg">
+				  <?php
 				  if(isset($message_log['type']) || isset($message_reg['type'])){
 					  $type = $message_log['type'] ?? $message_reg['type'];
 					  if($type == "success") echo '<i class="fa fa-check"></i>&nbsp;';
 						elseif($type == "warning") echo '<i class="fa fa-warning"></i>&nbsp;';
 							elseif($type == "error") echo '<i class="fa fa-times-circle"></i>&nbsp;';
 				  }
-				  echo $message_log['message'] ?? $message_reg['message']; 
+				  echo $message_log['message'] ?? $message_reg['message'];
 				  ?>
 				</div>
 			<!-- LOGIN -->
@@ -278,11 +280,11 @@
 			  <form autocomplete="off" method='POST' class="login-container">
 					<p><input type="text" name="username" placeholder="Потребителско Име или Имейл"></p>
 					<p><input type="password" name="password" placeholder="Парола за вход"></p>
-					<p style="width: 96.5%;"> 
-						<?php 
-						  $x = mt_rand(1, 10); 
+					<p style="width: 96.5%;">
+						<?php
+						  $x = mt_rand(1, 10);
 						  $y = mt_rand(1, 10);
-						  $z = $x + $y; 
+						  $z = $x + $y;
 						  echo "<input type='hidden' name='captcha2' value = {$z} />"
 						 ?>
 						<label style="width: 20%;position: relative; display: inline-block; text-align: center" for="captcha"><?= "{$x} + {$y} = " ?></label>
@@ -291,7 +293,7 @@
 			    <p><input type="submit" name="login" value="ВХОД В СИСТЕМАТА"></p>
 			  </form>
 			</div>
-			
+
 			<!-- Register -->
 			<div class="login">
 			  <h2 class="login-header">Регистрация</h2>
@@ -301,11 +303,11 @@
 			    <p><input type="email" name='email' placeholder="Имейл"></p>
 					<p><input name="password" type="password" placeholder="Парола"></p>
 					<p><input name="masterPw" type="password" placeholder="MASTER Парола"></p>
-					<p style="width: 96.5%;"> 
-						<?php 
-						  $x = mt_rand(1, 10); 
+					<p style="width: 96.5%;">
+						<?php
+						  $x = mt_rand(1, 10);
 						  $y = mt_rand(1, 10);
-						  $z = $x + $y; 
+						  $z = $x + $y;
 						  echo "<input type='hidden' name='captcha2' value = {$z} />"
 						 ?>
 						<label style="width: 20%;position: relative; display: inline-block; text-align: center" for="captcha"><?= "{$x} + {$y} = " ?></label>

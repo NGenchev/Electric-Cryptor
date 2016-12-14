@@ -123,7 +123,7 @@ body{
 #searchbar {
     display: inline-block;
     color: #b3b9c2;
-    width: 93%;
+    width: 90%;
     margin-left: 15px;
 }
 
@@ -157,7 +157,7 @@ form > input[type=submit]
 
 #searchbar > input[type=text] {
     height: 65px;
-    width: 84%;
+    width: 80%;
     border: none;
     font-size: 15pt;
     padding-left: 50px;
@@ -637,4 +637,36 @@ textarea
 .error-msg {
   color: #D8000C;
   background-color: #FFBABA;
+}
+
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 1100px) {
+  #searchbar { width: 90%;}
+  #searchbar > input[type=text]{ width: 75%;}
+  .article { width: 80%; }
+  .title {border: 0; width: 100%; text-align: center;}
+  .user-image { margin: 0 auto;}
+  body{ overflow-y: 0;}
+}
+
+@media screen and (max-width: 800px) {
+  body{ font-size: 10pt;}
+  #searchbar { width: 80%;}
+  #searchbar > input[type=text]{ width: 50%;}
+  nav { width: 100%; }
+  nav > ul { width: 100%;}
+  nav > ul > li { width:100%; display: block; margin: 10px auto;}
+  .login { width: 100%; font-size: 12pt;}
+}
+
+@media screen and (max-width: 400px) {
+  #topbar > #searchbar { width: 75%;}
+  #topbar > #searchbar > input[type=text]{ width: 40%; font-size: 12pt;}
+  #topbar > #searchbar > input[type=submit] { width: 55px; background-position: 13px 20px; }
+  .content2 { width: 250px; overflow-x: auto;}
+  .article { width: 70%; }
+  .title { font-size: 1em; }
+  .article > p { font-size: 10pt;}
 }

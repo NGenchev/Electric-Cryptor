@@ -17,7 +17,7 @@
 	<title>Secured Password Manager</title>
 	<link rel="stylesheet" type="text/css" href="styles/style-1.css">
 	<link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css">
-	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='js/jquery.js'></script>
 	<script src="js/toggle-side.js"></script><script src="js/search.js"></script>
 </head>
 <body>
@@ -125,7 +125,7 @@
 	      </tr>
 	      <tr>
 	     <td><strong>Тип на акаунта: </strong></td>
-	     <td style='text-transform: capitalize;'><?= $row['user_type'] ?></td>
+	     <td style='text-transform: capitalize;'><?= $row['user_type'] == 1 ? "Администратор" : "Потребител" ?></td>
 	   </tr>
 	     <tr>
 	    <td><strong>Последно влизане в акаунта: </strong></td>

@@ -11,14 +11,14 @@
 	<title>Security Password Manager</title>
 	<link rel="stylesheet" type="text/css" href="../styles/style-1.css">
 	<link rel="stylesheet" type="text/css" href="../styles/font-awesome.min.css">
-	<script src='../js/jquery.min.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="../js/toggle-side.js"></script>
 	<script src="../js/search.js"></script>
 </head>
 <body>
 	<div class="main">
     <div id="_side-panel" class="side-panel">
-    	<div class="user-image" style="background: url('<?= $_SESSION['avatar'] ?? "../imgs/avatar.png" ?>') no-repeat; background-size: contain; background-position: 50% 50%;"></div>
+    	<div class="user-image" style="background: url('<?= $_SESSION['avatar'] ?>') no-repeat; background-size: contain; background-position: 50% 50%;"></div>
 		<span class="user-name"><?= $_SESSION['name'] ?></span>
 		<hr class="separator">
 		<span class="menu-cat">Потребителски панел</span>
@@ -79,9 +79,10 @@
 					url: "remove_response.php",
 					data: {userID},
 					success: function(data){
-						data = JSON.parse(data);
-						if(data.valid==true) alert("Успешно изтрихте администратор!");
-						else alert("Този потребител не е администратор");
+						console.log(data);
+						//data = JSON.parse(data);
+						//if(data.valid==true) alert("Успешно изтрихте администратор!");
+						//else alert("Този потребител не е администратор");
 					}
 				});
 				return false;

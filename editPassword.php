@@ -35,13 +35,13 @@
 	$siteName   = $_POST['pw_url'];
 	$username   = $_POST['pw_username'];
 	if($username != NULL) 
-		$username = encrypt_uPwds($username);
+		$username = encrypt_uPwds($username, $masterPw);
 	else
-		$username = encrypt_uPwds($_POST['txtnm']);
+		$username = encrypt_uPwds($_POST['txtnm'], $masterPw);
 	$password   = $_POST['pw_password'];
 	$password2  = $_POST['pw_password2'];
 	if($password === $password2 && $masterValid === TRUE) {
-	  $password = encrypt_uPwds($password);
+	  $password = encrypt_uPwds($password, $masterPw);
 	  $sql = "UPDATE passwords SET `pw_site`='$siteName', `pw_user`='$username', `pw_content`='$password' WHERE `pw_id`='$id'";
 	  if($dbh->prepare($sql)->execute())
 		$message = array(
@@ -69,7 +69,7 @@
 	<title>Secured Password Manager</title>
 	<link rel="stylesheet" type="text/css" href="styles/style-1.css">
 	<link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css">
-	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='js/jquery.js'></script>
 	<script src="js/toggle-side.js"></script><script src="js/search.js"></script>
 </head>
 <body>

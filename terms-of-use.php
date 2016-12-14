@@ -6,7 +6,7 @@
 	<title>Secured Password Manager</title>
 	<link rel="stylesheet" type="text/css" href="styles/style-1.css">
 	<link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css">
-	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='js/jquery.js'></script>
 	<script src="js/toggle-side.js"></script>
 </head>
 <body>

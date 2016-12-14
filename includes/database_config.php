@@ -21,22 +21,32 @@
      echo 'Connection failed: ' . $e->getMessage();
   }
 
-  function encrypt_uPwds($pass)
+  function encrypt_uPwds($pass, $mKey)
   {
-    $splited = str_split($pass);
+	$max = max(mb_strlen($pass), mb_strlen($mKey));
+    $splitedPass = str_split($pass);
     $newData = null;
-    foreach($splited as $split)
+    foreach($splitedPass as $split)
     {
       $sign = ord($split) + 3; // (x+3)*3 = y    (5+3)*3 = 8*3 = 24     24/3 = 8 - 3;
       $sign = chr($sign);
       $newData .= $sign;
     }
+	
+	$splitedNewP = str_split($newData);
+	$splitedMKey = str_split($mKey);
+	$encPass = mb_strlen($pass)."*";
+	
+	for($i=0; $i<=$max; $i++)
+	{
+		$encPass .= $splitedMKey[$i] . $splitedNewP[$i];
+	}
 
     $salt = "sdiufh8hr348(*9f9p8h9gfde5#pass_q!werty123";
     $salt2 = "youtube3_#asda9asd3244mypasswo)_r993";
-    $newData = base64_encode($salt.$newData.$salt2);
+    $encPass = base64_encode($salt.$encPass.$salt2);
 
-    return $newData;
+    return $encPass;
   }
 
   function decrypt_uPwds($pass)
@@ -45,17 +55,27 @@
 	$salt2 = "youtube3_#asda9asd3244mypasswo)_r993";
 	$newData = base64_decode($pass);
 	$newData = str_replace($salt, "", str_replace($salt2, "", $newData));
+	$newData = explode("*", $newData, 2);
+	$len = $newData[0];
+	$newData = $newData[1];
+	$newData = str_split($newData);
+	
+	$decPass = NULL;
+	for($i = 0; $i <= $len*2 ; $i++)
+	{
+		$decPass .= $i%2!=0 ? $newData[$i] : "";
+	}
    
-	$splited = str_split($newData);
-	$newData = null;
+	$splited = str_split($decPass);
+	$decPass = null;
 	foreach($splited as $split)
 	{
 	  $sign = ord($split) - 3;
 	  $sign = chr($sign);
-	  $newData .= $sign;
+	  $decPass .= $sign;
 	}
 	  
-	return $newData;
+	return $decPass;
   }
 
   function encrypt($pass)
