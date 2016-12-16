@@ -110,7 +110,7 @@
   	<div id="topbar">
 	  	<div id="toggle-btn" onclick="toggleNav()"></div>
   		<div id="searchbar">
-  			<input type="text" name="search" placeholder="Търсене..." />
+  			<input type="text" id='searchId' name="search" placeholder="Търсене..." />
   			<input type="submit" name="search_button" value=" " />
   		</div>
   	</div>
@@ -131,8 +131,8 @@
 		<!-- Registration -->
 	<center>
 		<div class="content2">
-			<div class="login">
-			<div id='messageBox' style='width: 380px!important;' class="<?= $message['type'] ?>-msg">
+			
+			<div id='messageBox' style='width: 65% !important; float:left;' class="<?= $message['type'] ?>-msg">
 				  <?php 
 				  if(isset($message['type'])){
 					  $type = $message['type'];
@@ -142,7 +142,9 @@
 				  }
 				  echo $message['message']; 
 				  ?>
-				</div>
+			</div>
+			<!-- Login -->
+			<div class="login">
 			  <h2 class="login-header">Забравена Парола</h2>
 				
 			  <form method='POST' class="login-container">

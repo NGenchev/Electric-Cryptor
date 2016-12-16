@@ -459,7 +459,8 @@ table td.r, table th.r {
 	border: 2px solid #ebecef;
 	padding: 30px;
 	border-radius: 5px;
-	font-size: 14pt
+	font-size: 14pt;
+  margin: 0 auto;
 }
 
 
@@ -618,9 +619,12 @@ textarea
 .success-msg,
 .warning-msg,
 .error-msg {
-  margin: 10px 0;
+  margin: 10px;
   padding: 10px;
   border-radius: 3px 3px 3px 3px;
+  float: left;
+  display: block;
+  margin-left: 16.6%;
 }
 .info-msg {
   color: #059;
@@ -653,15 +657,33 @@ textarea
 
 @media screen and (max-width: 800px) {
   body{ font-size: 10pt;}
-  #searchbar { width: 80%;}
-  #searchbar > input[type=text]{ width: 50%;}
   nav { width: 100%; }
   nav > ul { width: 100%;}
   nav > ul > li { width:100%; display: block; margin: 10px auto;}
   .login { width: 100%; font-size: 12pt;}
+  .article { width: 90%;}
 }
 
+@media screen and (max-width: 700px){
+  #searchbar { width: 80%;}
+  #searchbar > input[type=text]{ width: 71%;}
+}
+@media screen and (max-width: 650px) {
+  #searchbar { width: 82%;}
+  #searchbar > input[type=text]{ width: 65%;}
+  .article { width: 75%;}
+}
+@media screen and (max-width: 550px) {
+  #searchbar { width: 82%;}
+  #searchbar > input[type=text]{ width: 50%;}
+}
 @media screen and (max-width: 400px) {
+  .article { width: 80%;} 
+  #searchbar { width: 80%;}
+  #searchbar > input[type=text]{ width: 42%;}
+}
+
+@media screen and (max-width: 358px) {
   #topbar > #searchbar { width: 75%;}
   #topbar > #searchbar > input[type=text]{ width: 40%; font-size: 12pt;}
   #topbar > #searchbar > input[type=submit] { width: 55px; background-position: 13px 20px; }

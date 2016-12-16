@@ -113,7 +113,7 @@
 	<center>
 		<div class="content2">
 		<div class="container2-login">
-			<div id='messageBox' style='width: 785px!important;' class="<?php echo $message['type']; ?>-msg">
+			<div id='messageBox' style='width: 65% !important;' class="<?php echo $message['type']; ?>-msg">
 				  <?php 
 				  if(isset($message['type'])){
 					  $type = $message['type'];

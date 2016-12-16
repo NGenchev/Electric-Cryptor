@@ -135,7 +135,7 @@
 		<!-- Table -->
 		<div class="content2">
 			<div class="container2-login">
-				<div id='messageBox' style='width: 36%!important;margin: 0 auto;' class="<?= $message['type'] ?>-msg">
+				<div id='messageBox' style='width: 65%!important;' class="<?= $message['type'] ?>-msg">
 				  <?php 
 				  if(isset($message['type'])){
 					  $type = $message['type'];

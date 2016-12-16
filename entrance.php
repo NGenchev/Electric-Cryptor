@@ -233,7 +233,7 @@
   	<div id="topbar">
 	  	<div id="toggle-btn" onclick="toggleNav()"></div>
   		<div id="searchbar">
-  			<input type="text" name="search" placeholder="Търсене..." />
+  			<input type="text" id='searchId' name="search" placeholder="Търсене..." />
   			<input type="submit" name="search_button" value=" " />
   		</div>
   	</div>

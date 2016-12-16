@@ -195,7 +195,7 @@
 	<center>
 		<div class="content2">
     <div class="container2-login">
-			<div id='messageBox' style='width: 785px!important;' class="<?php echo $message_cN['type']; ?>-msg">
+			<div id='messageBox' style='width: 65% !important;' class="<?php echo $message_cN['type']; ?>-msg">
 		  <?php 
 		  if(isset($message_cN['type'])){
 			  $type = $message_cN['type'];

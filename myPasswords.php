@@ -228,7 +228,7 @@
                 }
                 else {
                   echo '
-					<div id="messageBox" style="width: 65%!important;" class="info-msg">
+					<div id="messageBox" style="width: 65%!important; display: block; float: left;" class="info-msg">
 						<i class="fa fa-warning"></i>&nbsp;
 						Нямате добавени пароли...
 					</div>
@@ -240,7 +240,10 @@
 		</div>
 	</div>
 		<!-- Footer -->
-		<footer>
+		
+		<!-- Clear -->
+		<div class="clear"></div>
+		<footer style="display:block;">
 		  Всички права са запазени &copy; 2016-2017 Design &amp; Code By Electric Crew
 		</footer>
 	</div>
